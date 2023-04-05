@@ -3,6 +3,7 @@ package br.com.alura.linguagensapi;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,10 +32,10 @@ public class LanguageController {
   }
 
   @PostMapping("/linguagens")
-  public HttpStatus  createLanguage(@RequestBody Language language){
+  public ResponseEntity<Language>  createLanguage(@RequestBody Language language){
     
-    repository.save(language);
-    return HttpStatus.CREATED;
+    Language lang = repository.save(language);
+    return new ResponseEntity<>(lang, HttpStatus.CREATED);
     
   }
 
